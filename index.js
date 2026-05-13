@@ -4,21 +4,24 @@ import simpleGit from 'simple-git';
 
 const path = './data.json';
 
-const markComit = (x, y) => {
+const markCommit = (x, y) => {
     const date = moment()
-    .subtract(1, "y")
-    .add(1, "d")
-    .add(x, "w")
-    .add(y, "d")
-    .format()
+        .subtract(1, "y")
+        .add(1, "d")
+        .add(x, "w")
+        .add(y, "d")
+        .format();
 
-const data = {
-    date: date,
-};
+    const data = {
+        date: date,
+    };
 
-jsonfile.writeFile(path, data, () => {
-    simpleGit().add([path]).commit(date, {"--date": date}).push();
-});
+    jsonfile.writeFile(path, data, () => {
+        simpleGit()
+            .add([path])
+            .commit(date, { "--date": date })
+            .push();
+    });
 };
 
 markCommit(2, 3);
